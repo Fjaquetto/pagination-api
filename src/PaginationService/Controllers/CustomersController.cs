@@ -41,7 +41,11 @@ namespace PaginationService.App.Controllers
         [Route("customers")]
         public async Task<ActionResult<IEnumerable<CustomerViewModel>>> GetAllDataPaginated([FromQuery] PagedRequestViewModel page)
         {
+            var sw = new Stopwatch();
+            sw.Start();
             var customers = await _customerApplication.GetAllCustomersPaginated(page.PageIndex, page.PageSize);
+            sw.Stop();
+            Debug.WriteLine(sw.Elapsed);
             return Ok(customers);
         }
     }

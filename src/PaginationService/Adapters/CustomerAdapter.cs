@@ -7,8 +7,8 @@ namespace PaginationService.App.Adapters
     public class CustomerAdapter : ICustomerAdapter
     {
         public IEnumerable<CustomerViewModel> ConvertToCustomerViewModel(IEnumerable<Customer> entity)
-        { 
-            foreach(var item in entity)
+        {
+            foreach (var item in entity)
             {
                 yield return new CustomerViewModel(item.Id, item.Name, item.Email, ConvertToOrderViewModel(item));
             }
@@ -18,11 +18,11 @@ namespace PaginationService.App.Adapters
         {
             foreach (var item in entity.Orders)
             {
-                yield return new OrderViewModel(item.Id, item.OrderDate, item.TotalAmount, item.CustomerId, ConvertToOrderViewModel(item));
+                yield return new OrderViewModel(item.Id, item.OrderDate, item.TotalAmount, item.CustomerId, ConvertToOrderDetailsViewModel(item));
             }
         }
 
-        private IEnumerable<OrderDetailsViewModel> ConvertToOrderViewModel(Order entity)
+        private IEnumerable<OrderDetailsViewModel> ConvertToOrderDetailsViewModel(Order entity)
         {
             foreach (var item in entity.OrderDetails)
             {
